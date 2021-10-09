@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1633752448 source:d:\cursos\ads\quinto periodo\topicos de computação de alto desempenho\atividade de n1\repositorio\ordenacaoopenmp\main.c
+	<stdio.h>
+	<stdlib.h>
+	"time.h"
+	<omp.h>
+
