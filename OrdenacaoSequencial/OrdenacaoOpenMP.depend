@@ -5,8 +5,8 @@
 	"time.h"
 	<omp.h>
 
-1633984454 source:d:\cursos\ads\quinto periodo\topicos de computação de alto desempenho\atividade de n1\repositorio\ordenacaosequencial\main.c
+1633996027 source:d:\cursos\ads\quinto periodo\topicos de computação de alto desempenho\atividade de n1\repositorio\ordenacaosequencial\main.c
 	<stdio.h>
 	<stdlib.h>
-	"time.h"
+	<time.h>
 

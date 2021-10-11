@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "time.h"
+#include <time.h>
 #include <omp.h>
 
 void mergesort(int a[],int i,int j);
@@ -11,7 +11,7 @@ int dateRand()
     int i, R, BASE;
     for(i =0; i < 12; i++)
     {
-        R = (2^i)* 1000;
+        R = (2^i)* 100;
         printf("Array Interno: %d", R);
         return R;
     }
@@ -20,10 +20,10 @@ int dateRand()
 int main()
 {
     int *a, num = dateRand(), i;
-/*
-    printf("Defina o tamanho do vetor: ");
-    scanf("%d",&num);
-*/
+    /*
+        printf("Defina o tamanho do vetor: ");
+        scanf("%d",&num);
+    */
     srand(time(NULL));
 
     a = (int *)malloc(sizeof(int) * num);
@@ -43,16 +43,18 @@ int main()
     mergesort(a, 0, num-1);
     t = clock() - t;
 
+    int ID = omp_get_thread_num();
+    printf("\n( main ) numero da Thread: %d \n", ID);
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("\n%d elements => %f\n", i,time_taken );
+
     printf("\n\nVetor ordenado:\n");
 
     #pragma omp parallel
     for(i=0; i<num; i++)
+    {
         printf("%d | ",a[i]);
-    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    int ID = omp_get_thread_num();
-    printf("( main ) numero da Thread: %d \n", ID);
-
-    printf("fun() took %f seconds to execute \n", time_taken);
+    }
     return 0;
 }
 

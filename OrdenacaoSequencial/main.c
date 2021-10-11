@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "time.h"
+#include <time.h>
 
 void mergesort(int a[],int i,int j);
 void merge(int a[],int i1,int j1,int i2,int j2);
@@ -8,6 +8,7 @@ void merge(int a[],int i1,int j1,int i2,int j2);
 int main()
 {
     int *a, num, i;
+    clock_t t;
 
     printf("Defina o tamanho do vetor: ");
     scanf("%d",&num);
@@ -24,7 +25,11 @@ int main()
 
 
     printf("\n\nTempos Gastos:\n");
+    t = clock();
     mergesort(a, 0, num-1);
+    t = clock() - t;
+    double time_taken = ((double)t)/(CLOCKS_PER_SEC/1000); // in seconds
+    printf("%d elements => %f\n", i,time_taken );
 
     printf("\n\nVetor ordenado:\n");
     for(i=0; i<num; i++)
@@ -36,10 +41,9 @@ int main()
 
 void mergesort(int a[],int i,int j)
 {
+
     int mid;
-    clock_t t;
-    t = clock();
-    t = clock() - t;
+
 
     if(i<j)
     {
@@ -48,9 +52,8 @@ void mergesort(int a[],int i,int j)
         mergesort(a,mid+1,j);    //right recursion
         merge(a,i,mid,mid+1,j);    //merging of two sorted sub-arrays
 
-        double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-        printf("%d elements => %f\n", i,time_taken );
     }
+
 }
 
 void merge(int a[],int i1,int j1,int i2,int j2)
@@ -78,4 +81,5 @@ void merge(int a[],int i1,int j1,int i2,int j2)
     //Transfer elements from temp[] back to a[]
     for(i=i1,j=0; i<=j2; i++,j++)
         a[i]=temp[j];
+
 }
