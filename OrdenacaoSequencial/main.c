@@ -27,8 +27,8 @@ int main() {
         }
         tStop = clock();
 
-        cpu_time_used = ((double) (tStop - tStart)) / CLOCKS_PER_SEC;
-        printf("Vetor ->[%2d] - %10d elements => %5f ms\n", i+1, potencia, cpu_time_used);
+        cpu_time_used = ((double) tStart) / CLOCKS_PER_SEC;
+        printf("Vetor ->[%2d] - %10d elements => %0.5f ms\n", i+1, potencia, cpu_time_used);
         potencia*=2;
 
     }
