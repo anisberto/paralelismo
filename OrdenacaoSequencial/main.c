@@ -5,81 +5,69 @@
 void mergesort(int a[],int i,int j);
 void merge(int a[],int i1,int j1,int i2,int j2);
 
-int main()
-{
-    int *a, num, i;
-    clock_t t;
-
-    printf("Defina o tamanho do vetor: ");
-    scanf("%d",&num);
-
+int main() {
+    int *a, num=25, i, j, potencia=1000;
+    clock_t tStart, tStop;
     srand(time(NULL));
 
     a = (int *)malloc(sizeof(int) * num);
-    printf("\n\nVetor nao-ordenado:\n");
-    for(i=0; i<num; i++)
-    {
-        a[i] = rand() % 100;
-        printf("%d | ",a[i]);
-    }
 
+    for(i=0; i<num; i++) {
+        for(j=1; j<= potencia; j++) {
+            a[i] = rand() % 100;
+        }
 
-    printf("\n\nTempos Gastos:\n");
-    t = clock();
-    mergesort(a, 0, num-1);
-    t = clock() - t;
-    double time_taken = ((double)t)/(CLOCKS_PER_SEC/1000); // in seconds
-    printf("%d elements => %f\n", i,time_taken );
+        clock_t t;
+        t = clock();
 
-    printf("\n\nVetor ordenado:\n");
-    for(i=0; i<num; i++)
-    {
-        printf("%d | ",a[i]);
+        {
+            mergesort(a, 0, num-1);
+        }
+
+            t = clock() - t;
+
+            double time_token = (((double)t)/(CLOCKS_PER_SEC/1000));
+            printf("Vetor ->[%2d] - %10d elements => %10f ms\n", i+1, potencia, time_token);
+            potencia*=2;
     }
     return 0;
 }
-
-void mergesort(int a[],int i,int j)
-{
+void mergesort(int a[],int i,int j) {
 
     int mid;
 
-
-    if(i<j)
-    {
+    if(i<j) {
         mid=(i+j)/2;
-        mergesort(a,i,mid);        //left recursion
-        mergesort(a,mid+1,j);    //right recursion
-        merge(a,i,mid,mid+1,j);    //merging of two sorted sub-arrays
-
+        mergesort(a,i,mid);
+        mergesort(a,mid+1,j);
+        merge(a,i,mid,mid+1,j);
     }
 
 }
 
-void merge(int a[],int i1,int j1,int i2,int j2)
-{
-    int temp[1000];    //array used for merging
+void merge(int a[],int i1,int j1,int i2,int j2) {
+    int temp[1000];
     int i,j,k;
-    i=i1;    //beginning of the first list
-    j=i2;    //beginning of the second list
+    i=i1;
+    j=i2;
     k=0;
 
-    while(i<=j1 && j<=j2)    //while elements in both lists
-    {
+    while(i<=j1 && j<=j2) {
         if(a[i]<a[j])
             temp[k++]=a[i++];
         else
             temp[k++]=a[j++];
     }
 
-    while(i<=j1)    //copy remaining elements of the first list
+    while(i<=j1)  {
         temp[k++]=a[i++];
+    }
 
-    while(j<=j2)    //copy remaining elements of the second list
+    while(j<=j2) {
         temp[k++]=a[j++];
+    }
 
-    //Transfer elements from temp[] back to a[]
-    for(i=i1,j=0; i<=j2; i++,j++)
+    for(i=i1,j=0; i<=j2; i++,j++) {
         a[i]=temp[j];
-
+    }
 }
