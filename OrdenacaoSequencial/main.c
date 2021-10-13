@@ -8,6 +8,8 @@ void merge(int a[],int i1,int j1,int i2,int j2);
 int main() {
     int *a, num=25, i, j, potencia=1000;
     clock_t tStart, tStop;
+    double cpu_time_used;
+
     srand(time(NULL));
 
     a = (int *)malloc(sizeof(int) * num);
@@ -18,17 +20,17 @@ int main() {
         }
 
         clock_t t;
-        t = clock();
+        tStart = clock();
 
         {
             mergesort(a, 0, num-1);
         }
+        tStop = clock();
 
-            t = clock() - t;
+        cpu_time_used = ((double) (tStop - tStart)) / CLOCKS_PER_SEC;
+        printf("Vetor ->[%2d] - %10d elements => %5f ms\n", i+1, potencia, cpu_time_used);
+        potencia*=2;
 
-            double time_token = (((double)t)/(CLOCKS_PER_SEC/1000));
-            printf("Vetor ->[%2d] - %10d elements => %10f ms\n", i+1, potencia, time_token);
-            potencia*=2;
     }
     return 0;
 }

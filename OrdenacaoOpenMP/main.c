@@ -29,13 +29,14 @@ int main() {
             {
                 id = omp_get_thread_num();
                 nt = omp_get_num_threads();
-                printf("\n\nProcessado com a thread n: %d com um total de: %d\n", id, nt);
                 mergesort(a, 0, num-1);
             }
 
             t = clock() - t;
 
             double time_token = (((double)t)/(CLOCKS_PER_SEC/1000));
+
+            printf("\n\nProcessado com a thread n: %d com um total de: %d\n", id, nt);
             printf("Vetor ->[%2d] - %10d elements => %10f ms\n", i+1, potencia, time_token);
             potencia*=2;
         }
